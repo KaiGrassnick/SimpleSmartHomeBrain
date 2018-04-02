@@ -17,7 +17,14 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Room
  *
  * @ORM\Entity()
- * @ApiResource()
+ * @ApiResource(itemOperations={
+ *     "get",
+ *     "special"={
+ *         "method"="GET",
+ *         "path"="/room/{id}/special",
+ *         "controller"=App\Controller\ExampleSpecial::class
+ *     }
+ * })
  */
 class Room extends AbstractLocation
 {
