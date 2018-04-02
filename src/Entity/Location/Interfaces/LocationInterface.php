@@ -20,14 +20,6 @@ interface LocationInterface
 
 
     /**
-     * @param int $id
-     *
-     * @return \App\Entity\Location\Interfaces\LocationInterface
-     */
-    public function setId(int $id): LocationInterface;
-
-
-    /**
      * @return bool
      */
     public function isActive(): bool;

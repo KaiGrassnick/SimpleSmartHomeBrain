@@ -10,14 +10,12 @@
 namespace App\Controller;
 
 use App\Utils\Version;
-use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/")
+ * @Route("/custom/index")
  */
 class DefaultController extends SSHBController
 {
@@ -42,15 +40,24 @@ class DefaultController extends SSHBController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \FOS\RestBundle\View\View
+     * @return string
      *
-     * @Rest\Get()
+     * @Route()
      */
-    public function indexAction(Request $request): View
+    public function indexAction(Request $request)
     {
-        $data            = [];
-        $data["version"] = $this->version->getString();
-
-        return $this->view($data, Response::HTTP_OK);
+        return new Response('Hello World');
     }
+
+//    /**
+//     * @param \Symfony\Component\HttpFoundation\Request $request
+//     *
+//     */
+//    public function indexAction(Request $request): View
+//    {
+//        $data            = [];
+//        $data["version"] = $this->version->getString();
+//
+//        return $this->view($data, Response::HTTP_OK);
+//    }
 }

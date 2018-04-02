@@ -10,9 +10,9 @@
 namespace App\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-abstract class SSHBController extends FOSRestController
+abstract class SSHBController extends Controller
 {
 
     /**

@@ -11,12 +11,13 @@ namespace App\Entity\Location\Abstracts;
 
 use App\Entity\Location\Interfaces\LocationInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class AbstractLocation implements LocationInterface
 {
 
     /**
-     * @var int
+     * @var int The id of this location.
      *
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -25,16 +26,17 @@ abstract class AbstractLocation implements LocationInterface
     protected $id;
 
     /**
-     * @var bool
+     * @var bool Status of this location.
      *
      * @ORM\Column(type="boolean")
      */
-    protected $active;
+    protected $active = 0;
 
     /**
-     * @var string
+     * @var string Name of this location
      *
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $name;
 
@@ -45,19 +47,6 @@ abstract class AbstractLocation implements LocationInterface
     public function getId(): int
     {
         return $this->id;
-    }
-
-
-    /**
-     * @param int $id
-     *
-     * @return \App\Entity\Location\Interfaces\LocationInterface
-     */
-    public function setId(int $id): LocationInterface
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
 
