@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Room
+ * Class LocationRoom
  *
  * @ORM\Entity()
  * @ApiResource()
@@ -29,7 +29,7 @@ class Location extends AbstractLocation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ApiSubresource()
-     * @ORM\OneToMany(targetEntity="App\Entity\Location\Room", mappedBy="location")
+     * @ORM\OneToMany(targetEntity="App\Entity\Location\LocationRoom", mappedBy="location")
      */
     protected $rooms;
 
@@ -37,7 +37,7 @@ class Location extends AbstractLocation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ApiSubresource()
-     * @ORM\ManyToMany(targetEntity="App\Entity\Location\Level", inversedBy="locations", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Location\LocationLevel", inversedBy="locations", cascade={"persist"})
      */
     protected $levels;
 
@@ -62,11 +62,11 @@ class Location extends AbstractLocation
 
 
     /**
-     * @param \App\Entity\Location\Room $room
+     * @param \App\Entity\Location\LocationRoom $room
      *
      * @return \App\Entity\Location\Location
      */
-    public function addRoom(Room $room): Location
+    public function addRoom(LocationRoom $room): Location
     {
         if (!$this->rooms->contains($room)) {
             $this->rooms->add($room);
@@ -77,11 +77,11 @@ class Location extends AbstractLocation
 
 
     /**
-     * @param \App\Entity\Location\Room $room
+     * @param \App\Entity\Location\LocationRoom $room
      *
      * @return \App\Entity\Location\Location
      */
-    public function removeRoom(Room $room): Location
+    public function removeRoom(LocationRoom $room): Location
     {
         if ($this->rooms->contains($room)) {
             $this->rooms->removeElement($room);
@@ -101,11 +101,11 @@ class Location extends AbstractLocation
 
 
     /**
-     * @param \App\Entity\Location\Level $level
+     * @param \App\Entity\Location\LocationLevel $level
      *
      * @return \App\Entity\Location\Location
      */
-    public function addLevel(Level $level): Location
+    public function addLevel(LocationLevel $level): Location
     {
         if (!$this->levels->contains($level)) {
             $this->levels->add($level);
@@ -116,11 +116,11 @@ class Location extends AbstractLocation
 
 
     /**
-     * @param \App\Entity\Location\Level $level
+     * @param \App\Entity\Location\LocationLevel $level
      *
      * @return \App\Entity\Location\Location
      */
-    public function removeLevel(Level $level): Location
+    public function removeLevel(LocationLevel $level): Location
     {
         if ($this->levels->contains($level)) {
             $this->levels->removeElement($level);

@@ -9,7 +9,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Location\Room;
+use App\Entity\Location\LocationRoom;
 use App\Utils\Version;
 
 class ExampleSpecial
@@ -33,11 +33,11 @@ class ExampleSpecial
 
 
     /**
-     * @param \App\Entity\Location\Room $room
+     * @param \App\Entity\Location\LocationRoom $room
      *
-     * @return \App\Entity\Location\Room
+     * @return \App\Entity\Location\LocationRoom
      */
-    public function __invoke(Room $room): Room
+    public function __invoke(LocationRoom $room): LocationRoom
     {
         // do some magic
 

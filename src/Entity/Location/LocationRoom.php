@@ -14,7 +14,7 @@ use App\Entity\Location\Abstracts\AbstractLocation;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Room
+ * Class LocationRoom
  *
  * @ORM\Entity()
  * @ApiResource(itemOperations={
@@ -26,7 +26,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     }
  * })
  */
-class Room extends AbstractLocation
+class LocationRoom extends AbstractLocation
 {
 
     /**
@@ -37,9 +37,9 @@ class Room extends AbstractLocation
     protected $location;
 
     /**
-     * @var \App\Entity\Location\Level
+     * @var \App\Entity\Location\LocationLevel
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Location\Level", inversedBy="rooms", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location\LocationLevel", inversedBy="rooms", cascade={"persist"})
      */
     protected $level;
 
@@ -56,9 +56,9 @@ class Room extends AbstractLocation
     /**
      * @param \App\Entity\Location\Location $location
      *
-     * @return \App\Entity\Location\Room
+     * @return \App\Entity\Location\LocationRoom
      */
-    public function setLocation(Location $location): Room
+    public function setLocation(Location $location): LocationRoom
     {
         $this->location = $location;
 
@@ -67,20 +67,20 @@ class Room extends AbstractLocation
 
 
     /**
-     * @return \App\Entity\Location\Level
+     * @return \App\Entity\Location\LocationLevel
      */
-    public function getLevel(): Level
+    public function getLevel(): LocationLevel
     {
         return $this->level;
     }
 
 
     /**
-     * @param \App\Entity\Location\Level $level
+     * @param \App\Entity\Location\LocationLevel $level
      *
-     * @return \App\Entity\Location\Room
+     * @return \App\Entity\Location\LocationRoom
      */
-    public function setLevel(Level $level): Room
+    public function setLevel(LocationLevel $level): LocationRoom
     {
         $this->level = $level;
 
