@@ -30,7 +30,7 @@ abstract class AbstractLocation implements LocationInterface
      *
      * @ORM\Column(type="boolean")
      */
-    protected $active = 0;
+    protected $active;
 
     /**
      * @var string Name of this location
@@ -39,6 +39,16 @@ abstract class AbstractLocation implements LocationInterface
      * @Assert\NotBlank()
      */
     protected $name;
+
+
+    /**
+     * AbstractLocation constructor.
+     */
+    public function __construct()
+    {
+        $this->active = false;
+        $this->name   = 'New ' . self::class;
+    }
 
 
     /**
@@ -99,6 +109,6 @@ abstract class AbstractLocation implements LocationInterface
      */
     public function __toString(): string
     {
-        return $this->getName() ?? "New " . self::class;
+        return $this->getName();
     }
 }

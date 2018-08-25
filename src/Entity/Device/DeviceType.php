@@ -37,6 +37,15 @@ class DeviceType
 
 
     /**
+     * DeviceType constructor.
+     */
+    public function __construct()
+    {
+        $this->name = "New Device-Type";
+    }
+
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -77,5 +86,14 @@ class DeviceType
         $this->name = $name;
 
         return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }

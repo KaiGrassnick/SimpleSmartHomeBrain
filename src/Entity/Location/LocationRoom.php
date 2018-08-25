@@ -11,6 +11,7 @@ namespace App\Entity\Location;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Location\Abstracts\AbstractLocation;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +43,17 @@ class LocationRoom extends AbstractLocation
      * @ORM\ManyToOne(targetEntity="App\Entity\Location\LocationLevel", inversedBy="rooms", cascade={"persist"})
      */
     protected $level;
+
+
+    /**
+     * LocationRoom constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->location = new ArrayCollection();
+        $this->level    = new ArrayCollection();
+    }
 
 
     /**

@@ -42,7 +42,16 @@ class DeviceValue implements Timestampable
      *
      * @ORM\Column(type="json_array")
      */
-    protected $value = [];
+    protected $value;
+
+
+    /**
+     * DeviceValue constructor.
+     */
+    public function __construct()
+    {
+        $this->value = [];
+    }
 
 
     /**

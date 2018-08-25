@@ -47,6 +47,7 @@ class Location extends AbstractLocation
      */
     public function __construct()
     {
+        parent::__construct();
         $this->rooms  = new ArrayCollection();
         $this->levels = new ArrayCollection();
     }

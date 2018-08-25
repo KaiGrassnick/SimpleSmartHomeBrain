@@ -33,7 +33,7 @@ class Device
      *
      * @ORM\Column(type="boolean")
      */
-    protected $active = 0;
+    protected $active;
 
     /**
      * @var string Name of this Device
@@ -46,7 +46,7 @@ class Device
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      * @Assert\DateTime()
      */
     protected $lastSeen;
@@ -64,6 +64,17 @@ class Device
      * @ORM\ManyToOne(targetEntity="App\Entity\Device\DeviceType")
      */
     protected $type;
+
+
+    /**
+     * Device constructor.
+     */
+    public function __construct()
+    {
+        $this->active   = false;
+        $this->name     = "Device Name";
+        $this->lastSeen = new \DateTime("1970-01-01");
+    }
 
 
     /**
@@ -133,20 +144,20 @@ class Device
 
 
     /**
-     * @return null|\DateTime
+     * @return \DateTime
      */
-    public function getLastSeen(): ?\DateTime
+    public function getLastSeen(): \DateTime
     {
         return $this->lastSeen;
     }
 
 
     /**
-     * @param null|\DateTime $lastSeen
+     * @param \DateTime $lastSeen
      *
      * @return Device
      */
-    public function setLastSeen(?\DateTime $lastSeen): Device
+    public function setLastSeen(\DateTime $lastSeen): Device
     {
         $this->lastSeen = $lastSeen;
 
@@ -195,5 +206,14 @@ class Device
         $this->type = $type;
 
         return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }
