@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+    web:
+        image: nginx:alpine
+        ports:
+            - "${GETIN_NGINX_HTTP:-80}:80"
+            - "${GETIN_NGINX_HTTPS:-443}:443"
+        volumes:
+            - ./:/var/www/html
+            - ./docker/nginx/shared/conf.d:/etc/nginx/conf.d
+            - ./docker/nginx/${APP_ENV:?Environment}/sites-enabled:/etc/nginx/sites-enabled
+            - ./docker/nginx/${APP_ENV:?Environment}/ssl:/etc/nginx/ssl
+            - nginx-logs:/var/log/nginx
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        networks:
+            - frontend
+        depends_on:
+            - php-fpm
+
+    php-fpm:
+        image: kaigrassnick/docker-php:7.1-fpm-alpine
+        cap_add:
+            - SYS_PTRACE
+        env_file:
+            - .env
+        volumes:
+            - ./:/var/www/html
+            - ./docker/php/fpm/fpm.conf:/usr/local/etc/php-fpm.d/zz-sshb.conf
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        networks:
+            - frontend
+        environment:
+            - APP_ENV=${APP_ENV:?Environment}
+
+    mysql:
+        image: mysql
+        volumes:
+            - mysql-data:/var/lib/mysql
+        environment:
+            - "MYSQL_DATABASE=sshb"
+            - "MYSQL_USER=sshb"
+            - "MYSQL_PASSWORD=sshb"
+            - "MYSQL_ROOT_PASSWORD=ThisIsSomeSecretDatabasePassword"
+
+networks:
+    frontend:
+        driver: bridge
+
+volumes:
+    nginx-logs:
+        driver: local
+    mysql-data:
+        driver: local
