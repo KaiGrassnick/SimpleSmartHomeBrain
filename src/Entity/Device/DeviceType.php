@@ -7,17 +7,19 @@
  * @license    http://www.gnu.org/licenses/gpl-3.0.en.html
  */
 
-namespace App\Entity\Location\Abstracts;
+namespace App\Entity\Device;
 
-use App\Entity\Location\Interfaces\LocationInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-abstract class AbstractLocation implements LocationInterface
+/**
+ * @ORM\Entity()
+ */
+class DeviceType
 {
 
     /**
-     * @var int The id of this location.
+     * @var int The id of this Device.
      *
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -26,14 +28,7 @@ abstract class AbstractLocation implements LocationInterface
     protected $id;
 
     /**
-     * @var bool Status of this location.
-     *
-     * @ORM\Column(type="boolean")
-     */
-    protected $active;
-
-    /**
-     * @var string Name of this location
+     * @var string Name of this Device
      *
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
@@ -42,12 +37,11 @@ abstract class AbstractLocation implements LocationInterface
 
 
     /**
-     * AbstractLocation constructor.
+     * DeviceType constructor.
      */
     public function __construct()
     {
-        $this->active = false;
-        $this->name   = 'New ' . self::class;
+        $this->name = "New Device-Type";
     }
 
 
@@ -61,22 +55,13 @@ abstract class AbstractLocation implements LocationInterface
 
 
     /**
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return $this->active;
-    }
-
-
-    /**
-     * @param bool $active
+     * @param int $id
      *
-     * @return \App\Entity\Location\Interfaces\LocationInterface
+     * @return DeviceType
      */
-    public function setActive(bool $active): LocationInterface
+    public function setId(int $id): DeviceType
     {
-        $this->active = $active;
+        $this->id = $id;
 
         return $this;
     }
@@ -94,9 +79,9 @@ abstract class AbstractLocation implements LocationInterface
     /**
      * @param string $name
      *
-     * @return \App\Entity\Location\Interfaces\LocationInterface
+     * @return DeviceType
      */
-    public function setName(string $name): LocationInterface
+    public function setName(string $name): DeviceType
     {
         $this->name = $name;
 

@@ -4,10 +4,20 @@
 ###< System ###
 
 
+###> Docker ###
+/docker/nginx/*/ssl/*.key
+/docker/nginx/*/ssl/*.crt
+###< Docker ###
+
+
+###> git ###
+!.keep
+###< git ###
+
+
 ###> symfony/framework-bundle ###
 /.env
 /public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
