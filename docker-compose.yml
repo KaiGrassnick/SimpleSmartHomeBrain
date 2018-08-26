@@ -32,6 +32,7 @@ services:
             - /etc/timezone:/etc/timezone:ro
         networks:
             - frontend
+            - backend
         environment:
             - APP_ENV=${APP_ENV:?Environment}
 
@@ -44,9 +45,13 @@ services:
             - "MYSQL_USER=sshb"
             - "MYSQL_PASSWORD=sshb"
             - "MYSQL_ROOT_PASSWORD=ThisIsSomeSecretDatabasePassword"
+        networks:
+            - backend
 
 networks:
     frontend:
+        driver: bridge
+    backend:
         driver: bridge
 
 volumes:
